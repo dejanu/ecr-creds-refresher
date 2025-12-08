@@ -1,0 +1,23 @@
+apiVersion: v2
+name: ecr-creds-refresher
+description: Kubernetes operator for managing AWS ECR pull secrets automatically
+home: https://github.com/yourusername/operatorecr
+sources:
+  - https://github.com/yourusername/operatorecr
+keywords:
+  - operator
+  - ecr
+  - aws
+  - kubernetes
+  - docker-registry
+maintainers:
+  - name: Your Name
+    email: your.email@example.com
+
+type: application
+
+# Chart version
+version: 0.1.0
+
+# Operator version
+appVersion: "0.2.5"

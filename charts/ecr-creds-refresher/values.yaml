@@ -1,0 +1,98 @@
+# Default values for ecr-creds-refresher operator
+# This is a YAML-formatted file.
+
+# Operator configuration
+replicaCount: 1
+
+# Container image configuration
+image:
+  repository: dejanualex/ecr-creds-refresher
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion
+  tag: "0.2.3"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# AWS credentials configuration
+aws:
+  # Region where ECR registry is located
+  region: "us-east-1"
+  # ECR registry URL (without https://)
+  registry: "209202477790.dkr.ecr.us-east-1.amazonaws.com"
+  
+  # IMPORTANT HERE: 
+  # secret containing AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY)
+  # namespace of the secret
+  # Can be different from the operator's namespace
+  credentials:
+    secretName: "ecr-credential-refresher"
+    namespace: "teamapp"
+
+# Service account configuration
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use
+  # If not set and create is true, a name is generated using the fullname template
+  name: "ecr-operator"
+
+# RBAC configuration
+rbac:
+  # Specifies whether RBAC resources should be created
+  create: true
+  # Name of the ClusterRole and ClusterRoleBinding
+  # If not set, a name is generated using the fullname template
+  name: ""
+
+# Pod annotations
+podAnnotations: {}
+
+# Pod labels
+podLabels:
+  app: ecr-creds-refresher
+
+# Pod security context
+podSecurityContext: {}
+
+# Container security context
+securityContext:
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+  capabilities:
+    drop:
+    - ALL
+
+# Resource limits and requests
+resources:
+  limits:
+    memory: 128Mi
+    cpu: 200m
+  requests:
+    memory: 64Mi
+    cpu: 100m
+
+# Node selector
+nodeSelector: {}
+
+# Tolerations
+tolerations: []
+
+# Affinity
+affinity: {}
+
+# Volumes (if needed for temporary storage)
+volumes: []
+#  - name: tmp
+#    emptyDir: {}
+
+# Volume mounts
+volumeMounts: []
+#  - name: tmp
+#    mountPath: /tmp

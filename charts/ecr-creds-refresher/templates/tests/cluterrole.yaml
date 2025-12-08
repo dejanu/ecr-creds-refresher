@@ -1,0 +1,37 @@
+{{- if .Values.rbac.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "ecr-creds-refresher.fullname" . }}-role
+  labels:
+    {{- include "ecr-creds-refresher.labels" . | nindent 4 }}
+rules:
+  # Need to list all namespaces to iterate through them
+  # Kopf also needs to patch namespaces to store timer metadata
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list", "watch", "patch"]
+  
+  # Need to create, read, update and delete secrets for ECR credentials
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "list", "create", "update", "delete", "patch"]
+  
+  # Need to read and patch service accounts to add imagePullSecrets
+  - apiGroups: [""]
+    resources: ["serviceaccounts"]
+    verbs: ["get", "list", "patch"]
+  
+  # Need to create events for operator activity logging
+  - apiGroups: [""]
+    resources: ["events"]
+    verbs: ["create", "patch"]
+  
+  # Need to watch and update ECRPullSecret custom resources
+  - apiGroups: ["alchemy.com"]
+    resources: ["ecrpullsecrets"]
+    verbs: ["get", "list", "watch", "patch", "update"]
+  - apiGroups: ["alchemy.com"]
+    resources: ["ecrpullsecrets/status"]
+    verbs: ["patch", "update"]
+{{- end }}

@@ -1,0 +1,26 @@
+ECR Pull Secret Operator has been installed!
+
+Release Information:
+  Name:      {{ .Release.Name }}
+  Namespace: {{ .Release.Namespace }}
+  Version:   {{ .Chart.Version }}
+  App Version: {{ .Chart.AppVersion }}
+
+Check operator status:
+  kubectl get pods -n {{ .Release.Namespace }} -l app.kubernetes.io/name={{ include "ecr-creds-refresher.name" . }}
+  kubectl logs -n {{ .Release.Namespace }} -l app.kubernetes.io/name={{ include "ecr-creds-refresher.name" . }} -f
+
+Create CR:
+
+apiVersion: alchemy.com/v1alpha1
+kind: ECRPullSecret
+metadata:
+  name: ecr-config
+spec:
+  secretName: aws-registry-209202477790
+  namespaces:
+    - default
+
+⚠️  Important:
+  - Ensure the AWS credentials secret ({{ .Values.aws.credentials.namespace }}/{{ .Values.aws.credentials.secretName }}) exists
+  - The operator needs AWS credentials with 'ecr:GetAuthorizationToken' permission
