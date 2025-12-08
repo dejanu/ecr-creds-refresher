@@ -1,3 +1,21 @@
+## Layout
+    
+  Options to configure your cluster (i.e. k3s) to pull from a private repo (i.e. in ECR):
+
+  * Configure **containerd** to connect to [private registry](https://docs.k3s.io/installation/private-registry) via `/etc/rancher/k3s/registries.yaml` config.
+    
+  * Configure a [credential provider plugin](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-credential-provider/) to be used by the kubelet
+  `/var/lib/rancher/k3s/agent/etc/containerd/config.toml `.
+
+  * Use `ecr-creds-refresher`: 
+
+   ![flow](./diagrams/highlevel.png)
+
+⚠️ An authentication token is used to access any Amazon ECR registry that your IAM principal has access to and is [valid for 12 hours](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html#registry-auth-token) 
+
+
+---
+
 ## ECR-creds-refresher
 
 * Prereq: A secret that holds the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` the secret can be in any namespace.
@@ -41,16 +59,6 @@ helm install operator demo/ecr-creds-refresher --namespace TARGET_NAMESPACE \
 
   ---
 
-  Options to configure your cluster (i.e. k3s) to pull from a private repo (i.e. in ECR):
-
-  * Configure **containerd** to connect to [private registry](https://docs.k3s.io/installation/private-registry) via `/etc/rancher/k3s/registries.yaml` config.
-    
-  * Configure a [credential provider plugin](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-credential-provider/) to be used by the kubelet
-  `/var/lib/rancher/k3s/agent/etc/containerd/config.toml `.
-
-  * Use `ecr-creds-refresher`: 
-
-   ![flow](./diagrams/highlevel.png)
   
   
 
