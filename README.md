@@ -7,10 +7,10 @@ helm repo add demo https://dejanu.github.io/ecr-creds-refresher/packages
 helm search repo demo
 
 # install operator 
-helm install operator ecr-creds-refresher --namespace operator \
+helm install operator demo/ecr-creds-refresher --namespace TARGET_NAMESPACE \
   --create-namespace \
-  --set aws.credentials.secretName=ecr-credential-refresher \
-  --set aws.credentials.namespace=default \
+  --set aws.credentials.secretName=SECRET_HOLDING_AWS_CREDS \
+  --set aws.credentials.namespace=SECRET_NAMESPACE \
   --set aws.region=us-east-1 \
   --set aws.registry=YOUR_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
 
