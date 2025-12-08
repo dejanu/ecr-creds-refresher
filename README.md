@@ -1,5 +1,22 @@
 ## ECR-creds-refresher
 
+
+```bash
+# add repo
+helm repo add demo https://dejanu.github.io/ecr-creds-refresher/packages
+helm search repo demo
+
+# install operator 
+helm install operator ecr-creds-refresher --namespace operator \
+  --create-namespace \
+  --set aws.credentials.secretName=ecr-credential-refresher \
+  --set aws.credentials.namespace=default \
+  --set aws.region=us-east-1 \
+  --set aws.registry=YOUR_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
+
+```
+
+
 1. Operator Startup
    ↓
 2. Reads AWS Credentials (from configured secret in any namespace)
