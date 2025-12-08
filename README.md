@@ -1,6 +1,10 @@
 ## ECR-creds-refresher
 
+* Prereq: A secret that holds the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` the secret can be in any namespace.
+  
+* Install:
 
+  
 ```bash
 # add repo
 helm repo add demo https://dejanu.github.io/ecr-creds-refresher/packages
@@ -35,8 +39,5 @@ helm install operator demo/ecr-creds-refresher --namespace TARGET_NAMESPACE \
 6. When CR Deleted:
    - Logs cleanup instructions (doesn't auto-delete secrets)
   
-### Prereq
-
-* A secret that holds the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` the secret can be in any namespace
   
 
