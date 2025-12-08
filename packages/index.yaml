@@ -1,3 +1,26 @@
 apiVersion: v1
-entries: {}
-generated: "2025-12-08T10:08:55.11716925Z"
+entries:
+  ecr-creds-refresher:
+  - apiVersion: v2
+    appVersion: 0.2.5
+    created: "2025-12-08T10:15:39.786962426Z"
+    description: Kubernetes operator for managing AWS ECR pull secrets automatically
+    digest: 0b634df51f1120e99cd69a399f5acdd34ca975d1057e7213716374837226152f
+    home: https://github.com/yourusername/operatorecr
+    keywords:
+    - operator
+    - ecr
+    - aws
+    - kubernetes
+    - docker-registry
+    maintainers:
+    - email: your.email@example.com
+      name: Your Name
+    name: ecr-creds-refresher
+    sources:
+    - https://github.com/yourusername/operatorecr
+    type: application
+    urls:
+    - https://dejanu.github.io/ecr-creds-refresher/packages/ecr-creds-refresher-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-12-08T10:15:39.786435842Z"
