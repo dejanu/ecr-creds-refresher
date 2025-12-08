@@ -40,7 +40,15 @@ helm install operator demo/ecr-creds-refresher --namespace TARGET_NAMESPACE \
    - Logs cleanup instructions (doesn't auto-delete secrets)
 
   ---
-  
+
+  Options to configure your cluster (i.e. k3s) to pull from a private repo (i.e. in ECR):
+
+  * Configure **containerd** to connect to [private registry](https://docs.k3s.io/installation/private-registry) via `/etc/rancher/k3s/registries.yaml` config.
+    
+  * Configure a [credential provider plugin](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-credential-provider/) to be used by the kubelet
+  `/var/lib/rancher/k3s/agent/etc/containerd/config.toml `.
+
+  * Use `ecr-creds-refresher`: 
 
    ![flow](./diagrams/highlevel.png)
   
