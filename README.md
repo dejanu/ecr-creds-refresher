@@ -38,6 +38,8 @@ helm install operator demo/ecr-creds-refresher --namespace TARGET_NAMESPACE \
    ↓
 6. When CR Deleted:
    - Logs cleanup instructions (doesn't auto-delete secrets)
+
+  ---
   
 
    ![flow](./diagrams/highlevel.png)
