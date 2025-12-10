@@ -1,13 +1,13 @@
 ## Layout
     
-  Options to configure your cluster (i.e. k3s) to pull from a private repo (i.e. in ECR):
+  Options to configure your cluster (i.e. k3s) to pull images from a private repo (i.e. in ECR):
 
   * Configure **containerd** to connect to [private registry](https://docs.k3s.io/installation/private-registry) via `/etc/rancher/k3s/registries.yaml` config.
     
   * Configure a [credential provider plugin](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-credential-provider/) to be used by the kubelet
-  `/var/lib/rancher/k3s/agent/etc/containerd/config.toml `.
+  `/var/lib/rancher/k3s/agent/etc/containerd/config.toml `. Starting from Kubernetes v1.20, the kubelet can **dynamically** retrieve credentials for a container image registry using exec plugins.
 
-  * Use `ecr-creds-refresher`: 
+  * Deploy `ecr-creds-refresher` operator: 
 
    ![flow](./diagrams/highlevel.png)
 
@@ -26,6 +26,7 @@
 ```bash
 # add repo
 helm repo add demo https://dejanu.github.io/ecr-creds-refresher/packages
+helm repo update demo
 helm search repo demo
 
 # install operator 
